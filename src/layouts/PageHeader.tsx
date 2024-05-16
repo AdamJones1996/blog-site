@@ -1,4 +1,4 @@
-import { ArrowLeft, Bell, Menu, Search, User } from "lucide-react";
+import { ArrowLeft, Bell, Menu, Mic, Search, Upload, User } from "lucide-react";
 import logo from "../assets/Logo.png";
 import { Button } from "../components/Button";
 import { useState } from "react";
@@ -36,6 +36,9 @@ export function PageHeader() {
             <Search />
           </Button>
         </div>
+        <Button type="button" size="icon" className="flex-shrink-0">
+          <Mic />
+        </Button>
       </form>
       <div
         className={`flex-shrink-0 md:gap-2 ${
@@ -50,7 +53,13 @@ export function PageHeader() {
         >
           <Search />
         </Button>
-        <Button size="icon" variant="ghost">
+        <Button size="icon" variant="ghost" className="hidden md:inline-flex">
+          <Mic />
+        </Button>
+        <Button size="icon" variant="ghost" className="hidden md:inline-flex">
+          <Upload />
+        </Button>
+        <Button size="icon" variant="ghost" className="hidden md:inline-flex">
           <Bell />
         </Button>
         <Button size="icon" variant="ghost">
