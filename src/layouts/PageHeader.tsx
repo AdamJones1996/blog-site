@@ -1,11 +1,11 @@
-import { ArrowLeft, Bell, Menu, Mic, Search, Upload, User } from "lucide-react"
-import logo from "../assets/Logo.png"
-import { Button } from "../components/Button"
-import { useState } from "react"
-import { useSidebarContext } from "../contexts/SidebarContext"
+import { ArrowLeft, Bell, Menu, Mic, Search, Upload, User } from "lucide-react";
+import logo from "../assets/Logo.png";
+import { Button } from "../components/Button";
+import { useState } from "react";
+import { useSidebarContext } from "../contexts/SidebarContext";
 
 export function PageHeader() {
-  const [showFullWidthSearch, setShowFullWidthSearch] = useState(false)
+  const [showFullWidthSearch, setShowFullWidthSearch] = useState(false);
 
   return (
     <div className="flex gap-10 lg:gap-20 justify-between pt-2 mb-6 mx-4">
@@ -36,9 +36,6 @@ export function PageHeader() {
             <Search />
           </Button>
         </div>
-        <Button type="button" size="icon" className="flex-shrink-0">
-          <Mic />
-        </Button>
       </form>
       <div
         className={`flex-shrink-0 md:gap-2 ${
@@ -53,12 +50,6 @@ export function PageHeader() {
         >
           <Search />
         </Button>
-        <Button size="icon" variant="ghost" className="md:hidden">
-          <Mic />
-        </Button>
-        <Button size="icon" variant="ghost">
-          <Upload />
-        </Button>
         <Button size="icon" variant="ghost">
           <Bell />
         </Button>
@@ -67,17 +58,17 @@ export function PageHeader() {
         </Button>
       </div>
     </div>
-  )
+  );
 }
 
 type PageHeaderFirstSectionProps = {
-  hidden?: boolean
-}
+  hidden?: boolean;
+};
 
 export function PageHeaderFirstSection({
   hidden = false,
 }: PageHeaderFirstSectionProps) {
-  const { toggle } = useSidebarContext()
+  const { toggle } = useSidebarContext();
 
   return (
     <div
@@ -92,5 +83,5 @@ export function PageHeaderFirstSection({
         <img src={logo} className="h-6" />
       </a>
     </div>
-  )
+  );
 }
