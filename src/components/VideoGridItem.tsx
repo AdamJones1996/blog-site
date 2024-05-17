@@ -1,23 +1,25 @@
-import { useEffect, useRef, useState } from "react"
-import { formatDuration } from "../utils/formatDuration"
-import { formatTimeAgo } from "../utils/formatTimeAgo"
+import { useEffect, useRef, useState } from "react";
+import { formatDuration } from "../utils/formatDuration";
+import { formatTimeAgo } from "../utils/formatTimeAgo";
 
 type VideoGridItemProps = {
-  id: string
-  title: string
+  id: string;
+  title: string;
   channel: {
-    id: string
-    name: string
-    profileUrl: string
-  }
-  views: number
-  postedAt: Date
-  duration: number
-  thumbnailUrl: string
-  videoUrl: string
-}
+    id: string;
+    name: string;
+    profileUrl: string;
+  };
+  views: number;
+  postedAt: Date;
+  duration: number;
+  thumbnailUrl: string;
+  videoUrl: string;
+};
 
-const VIEW_FORMATTER = new Intl.NumberFormat(undefined, { notation: "compact" })
+const VIEW_FORMATTER = new Intl.NumberFormat(undefined, {
+  notation: "compact",
+});
 
 export function VideoGridItem({
   id,
@@ -29,19 +31,19 @@ export function VideoGridItem({
   thumbnailUrl,
   videoUrl,
 }: VideoGridItemProps) {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current == null) return
+    if (videoRef.current == null) return;
 
     if (isVideoPlaying) {
-      videoRef.current.currentTime = 0
-      videoRef.current.play()
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
     } else {
-      videoRef.current.pause()
+      videoRef.current.pause();
     }
-  }, [isVideoPlaying])
+  }, [isVideoPlaying]);
 
   return (
     <div
@@ -60,8 +62,8 @@ export function VideoGridItem({
           {formatDuration(duration)}
         </div>
         <video
-          className={`block h-full object-cover absolute inset-0 transition-opacity duration-200 ${
-            isVideoPlaying ? "opacity-100 delay-200" : "opacity-0"
+          className={`block h-full object-cover absolute inset-0 transition-opacity duration-2000 ${
+            isVideoPlaying ? "opacity-100 delay-200-" : "opacity-0"
           }`}
           ref={videoRef}
           muted
@@ -86,5 +88,5 @@ export function VideoGridItem({
         </div>
       </div>
     </div>
-  )
+  );
 }

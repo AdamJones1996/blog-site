@@ -1,52 +1,55 @@
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "./Button"
-import { useEffect, useRef, useState } from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "./Button";
+import { useEffect, useRef, useState } from "react";
 
 type CategoryPillProps = {
-  categories: string[]
-  selectedCategory: string
-  onSelect: (category: string) => void
-}
+  categories: string[];
+  selectedCategory: string;
+  onSelect: (category: string) => void;
+};
 
-const TRANSLATE_AMOUNT = 200
+const TRANSLATE_AMOUNT = 200;
 
 export function CategoryPills({
   categories,
   selectedCategory,
   onSelect,
 }: CategoryPillProps) {
-  const [translate, setTranslate] = useState(0)
-  const [isLeftVisible, setIsLeftVisible] = useState(false)
-  const [isRightVisible, setIsRightVisible] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [translate, setTranslate] = useState(0);
+  const [isLeftVisible, setIsLeftVisible] = useState(false);
+  const [isRightVisible, setIsRightVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (containerRef.current == null) return
+    if (containerRef.current == null) return;
 
-    const observer = new ResizeObserver(entries => {
-      const container = entries[0]?.target
-      if (container == null) return
+    const observer = new ResizeObserver((entries) => {
+      const container = entries[0]?.target;
+      if (container == null) return;
 
-      setIsLeftVisible(translate > 0)
+      setIsLeftVisible(translate > 0);
       setIsRightVisible(
         translate + container.clientWidth < container.scrollWidth
-      )
-    })
+      );
+    });
 
-    observer.observe(containerRef.current)
+    observer.observe(containerRef.current);
 
     return () => {
-      observer.disconnect()
-    }
-  }, [categories, translate])
+      observer.disconnect();
+    };
+  }, [categories, translate]);
 
   return (
-    <div ref={containerRef} className="overflow-x-hidden relative">
+    <div
+      ref={containerRef}
+      className="overflow-x-hidden relative align-content: center"
+    >
       <div
         className="flex whitespace-nowrap gap-3 transition-transform w-[max-content]"
         style={{ transform: `translateX(-${translate}px)` }}
       >
-        {categories.map(category => (
+        {categories.map((category) => (
           <Button
             key={category}
             onClick={() => onSelect(category)}
@@ -64,11 +67,11 @@ export function CategoryPills({
             size="icon"
             className="h-full aspect-square w-auto p-1.5"
             onClick={() => {
-              setTranslate(translate => {
-                const newTranslate = translate - TRANSLATE_AMOUNT
-                if (newTranslate <= 0) return 0
-                return newTranslate
-              })
+              setTranslate((translate) => {
+                const newTranslate = translate - TRANSLATE_AMOUNT;
+                if (newTranslate <= 0) return 0;
+                return newTranslate;
+              });
             }}
           >
             <ChevronLeft />
@@ -82,18 +85,18 @@ export function CategoryPills({
             size="icon"
             className="h-full aspect-square w-auto p-1.5"
             onClick={() => {
-              setTranslate(translate => {
+              setTranslate((translate) => {
                 if (containerRef.current == null) {
-                  return translate
+                  return translate;
                 }
-                const newTranslate = translate + TRANSLATE_AMOUNT
-                const edge = containerRef.current.scrollWidth
-                const width = containerRef.current.clientWidth
+                const newTranslate = translate + TRANSLATE_AMOUNT;
+                const edge = containerRef.current.scrollWidth;
+                const width = containerRef.current.clientWidth;
                 if (newTranslate + width >= edge) {
-                  return edge - width
+                  return edge - width;
                 }
-                return newTranslate
-              })
+                return newTranslate;
+              });
             }}
           >
             <ChevronRight />
@@ -101,5 +104,5 @@ export function CategoryPills({
         </div>
       )}
     </div>
-  )
+  );
 }

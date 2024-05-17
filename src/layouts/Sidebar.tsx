@@ -1,12 +1,9 @@
 import {
   ChevronDown,
   ChevronUp,
-  Clapperboard,
   Clock,
-  Home,
   Library,
   PlaySquare,
-  Repeat,
   History,
   ListVideo,
   Flame,
@@ -20,6 +17,9 @@ import {
   Lightbulb,
   Shirt,
   Podcast,
+  Speech,
+  BookOpenCheck,
+  Languages,
 } from "lucide-react";
 import { Children, ElementType, ReactNode, useState } from "react";
 import { Button, buttonStyles } from "../components/Button";
@@ -34,28 +34,7 @@ export function Sidebar() {
   return (
     <>
       <aside
-        className={`fixed bottom-0 left-0 w-full flex overflow-x-auto scrollbar-hidden px-2 ${
-          isLargeOpen ? "lg:hidden" : "lg:flex"
-        }`}
-      >
-        <SmallSidebarItem Icon={Home} title="Home" url="/" />
-        <SmallSidebarItem Icon={Repeat} title="Shorts" url="/shorts" />
-        <SmallSidebarItem
-          Icon={Clapperboard}
-          title="Subscriptions"
-          url="/subscriptions"
-        />
-        <SmallSidebarItem Icon={Library} title="Library" url="/library" />
-      </aside>
-
-      {isSmallOpen && (
-        <div
-          onClick={close}
-          className="lg:hidden fixed inset-0 z-[999] bg-secondary-dark opacity-50"
-        />
-      )}
-      <aside
-        className={`w-56 lg:sticky absolute top-0 overflow-y-auto scrollbar-hidden pb-4 flex-col gap-2 px-2 ${
+        className={`w-56 lg:sticky absolute top-0 overflow-y-auto scrollbar-hidden pb-4 flex-col gap-2 px-2  ${
           isLargeOpen ? "lg:flex" : "lg:hidden"
         } ${isSmallOpen ? "flex z-[999] bg-white max-h-screen" : "hidden"}`}
       >
@@ -63,11 +42,23 @@ export function Sidebar() {
           <PageHeaderFirstSection />
         </div>
         <LargeSidebarSection>
-          <LargeSidebarItem isActive IconOrImgUrl={Home} title="Home" url="/" />
           <LargeSidebarItem
-            IconOrImgUrl={Clapperboard}
-            title="Subscriptions"
-            url="/subscriptions"
+            isActive
+            IconOrImgUrl={BookOpenCheck}
+            title="English Blog"
+            url="/"
+          />
+          <LargeSidebarItem
+            IconOrImgUrl={Speech}
+            title="
+            Live Lessons"
+            url="/Live Lessons"
+          />
+          <LargeSidebarItem
+            IconOrImgUrl={Languages}
+            title="
+            Language Exchange"
+            url="/Live Lessons"
           />
         </LargeSidebarSection>
         <hr />
@@ -160,27 +151,6 @@ export function Sidebar() {
         </LargeSidebarSection>
       </aside>
     </>
-  );
-}
-
-type SmallSidebarItemProps = {
-  Icon: ElementType;
-  title: string;
-  url: string;
-};
-
-function SmallSidebarItem({ Icon, title, url }: SmallSidebarItemProps) {
-  return (
-    <a
-      href={url}
-      className={twMerge(
-        buttonStyles({ variant: "ghost" }),
-        "py-4 px-1 flex flex-col items-center rounded-lg gap-1"
-      )}
-    >
-      <Icon className="w-6 h-6" />
-      <div className="text-sm">{title}</div>
-    </a>
   );
 }
 
